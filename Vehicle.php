@@ -6,8 +6,8 @@ class Vehicle
     private int $numberOfSeats;
     private ?string $brand;
     private ?string $color;
-    protected bool $isTankEmpty = true;
-    protected bool $isStarted = false;
+    protected bool $isTankEmpty = false;
+    protected bool $isStarted = true;
     public ?string $start;
     public ?string $stop;
 
@@ -50,9 +50,24 @@ class Vehicle
     {
         return $this->color;
     }
+function setStart($start){
+        $this->start = $start;
+        if($this->isTankEmpty === true) echo "Vozilo nije moguce pokrenuti,nema goriva  " ;
+    if($this->isStarted === true) echo "Vozilo je vec startovano  ";
+    if($this->isStarted === false && $this->isTankEmpty === false) echo  "Vozilo je uspjesno startovano  ";
+}
+function getStart(){
+        return $this->start;
+}
 
-
-
+function setStop($stop) {
+        $this->stop = $stop;
+    if($this->isStarted === false) echo "Vozilo je vec iskljuceno  ";
+    if($this->isStarted === true) echo "Vozilo je uspjesno iskljuceno  ";
+}
+function getStop (){
+        return $this->stop;
+}
 
 }
 class Car extends Vehicle {
@@ -71,14 +86,13 @@ class Car extends Vehicle {
         echo "Brand of this car is: {$this->getBrand()}<br>";
 
         echo "Color of this car is: {$this->getColor()}<br>";
-        if($this->isTankEmpty === true) echo "Vozilo nije moguce pokrenuti,nema goriva " ;
-        if($this->isStarted === true) echo "Vozilo je vec startovano";
-        if($this->isStarted === false && $this->isTankEmpty === false) echo  "Vozilo je uspjesno startovano";
-        echo " {$this->isTankEmpty}<br>";
-        if($this->isStarted === false) echo "Vozilo je vec iskljuceno";
-        if($this->isStarted === true) echo "Vozilo je uspjesno iskljuceno";
-        echo "<br>";
-        // echo "Car is:  {$this->getStart()}<br>";
+
+        echo " {$this->getStart()}<br>";
+
+        //echo "<br>";
+
+        echo "{$this->getStop()}<br>";
+        // echo "Car is:  {$this->getStart()}<br>";    isTankEmpty
     }
 }
 $car = new Car();
@@ -86,6 +100,8 @@ $car->setnumberOfWheels(4);
 $car->setnumberOfSeats(5);
 $car->setBrand("Volvo");
 $car->setColor("Gray");
+$car->setStart("");
+$car->setStop("");
 
 
 
@@ -111,9 +127,9 @@ class Truck extends Car {
 
         echo "Color of this truck is: {$this->getColor()}<br>";
 
-        echo "Tank of this truck is: {$this->isTankEmpty}<br>";
+        echo " {$this->getStart()}<br>";
 
-        echo "Truck is:  {$this->isStarted}<br>";
+       // echo "Truck is:  {$this->isStarted}<br>";
     }
 }
 $truck = new Truck();
@@ -121,6 +137,7 @@ $truck->setnumberOfWheels(4);
 $truck->setnumberOfSeats(2);
 $truck->setBrand("Man");
 $truck->setColor("White");
+$truck->setStart("");
 
 
 $truck->printTruckDescription();
